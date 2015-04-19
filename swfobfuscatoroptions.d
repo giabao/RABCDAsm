@@ -35,7 +35,7 @@ class SwfObfuscatorOptions
 
 	string excludesFile = null;
 	string fixedNamesFile = null;
-	string includesFile = null;
+	string partExcludesFile = null;
 	string outputExt = "out";
 	string namePrefix = "";
 
@@ -51,7 +51,7 @@ Options:
       --funny                    this option is undocumented
   -g, --globalFile=FILE          the global file to use (multiple supported, default: "./playerglobal.swc")
   -h, --help                     display this help and exit
-  -i, --includes=FILE            include names that match any listed in FILE
+  -p, --partExcludes=FILE        exclude names that is part of any listed in FILE (ex: abc.XYZ will exclude acb, XYZ, abc.XYZ) 
   -j, --json                     the symbol name of a json binary tag to process (multiple supported)
   -n, --namePrefix               prefix for each generated name (default: "")
   -o, --outputExt                the output file extension (default: "out")
@@ -77,7 +77,7 @@ EOS";
 			"funny", &funny,
 			"globalFile|g", &globalFiles,
 			"help|h", &help,
-			"includes|i", &includesFile,
+			"partExcludes|p", &partExcludesFile,
 			"json|j", &jsonNames,
 			"namePrefix|n", &namePrefix,
 			"outputExt|o", &outputExt,
