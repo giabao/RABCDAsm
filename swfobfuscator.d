@@ -49,6 +49,7 @@ import std.experimental.logger;
 import obfuscator.fixednamemap;
 import obfuscator.renaming;
 import obfuscator.obfuscatable;
+import obfuscator.optimizenames;
 
 class SwfObfuscator {
   SwfObfuscatorOptions opt;
@@ -56,7 +57,6 @@ class SwfObfuscator {
   FixedNameMap fixedNames = new FixedNameMap();
 	Renaming renaming;
 	@property string[string] fullRenames()  { return renaming.fullRenames; };
-	@property string[string] partialRenames() { return renaming.partialRenames; };
 
 	uint[] jsonIds;
 
@@ -282,6 +282,8 @@ class SwfObfuscator {
 
 			renaming.generateFullRenames(tag);
 		}
+
+		OptimizeNames.optimize(fullRenames, opt.namePrefix);
 
 		fullRenames.rehash();
     fixedNames.fix(renaming.fullRenames);

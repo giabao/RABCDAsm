@@ -37,7 +37,7 @@ class SwfObfuscatorOptions
 	string fixedNamesFile = null;
 	string partExcludesFile = null;
 	string outputExt = "out";
-	string namePrefix = "";
+	string namePrefix = "$";
 
 	string[] globalFiles;
 	string[] jsonNames;
@@ -53,7 +53,7 @@ Options:
   -h, --help                     display this help and exit
   -p, --partExcludes=FILE        exclude names that is part of any listed in FILE (ex: abc.XYZ will exclude acb, XYZ, abc.XYZ) 
   -j, --json                     the symbol name of a json binary tag to process (multiple supported)
-  -n, --namePrefix               prefix for each generated name (default: "")
+  -n, --namePrefix               prefix for each generated name (default: "$")
   -o, --outputExt                the output file extension (default: "out")
   -q, --quiet                    do not print renames
       --skipCacheAsBitmapByte    skip reading an extra byte for PlaceObject3 tags

@@ -63,29 +63,9 @@ class Renaming {
 		
 		return r;
 	}
-	
-	//static const char[] DIGITS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$0123456789";
-	//static ubyte[] toDigits(uint n, ubyte b) {
-	//  ubyte[] digits = [];
-	//  while (n > 0) {
-	//    digits ~= n % b;
-	//    n /= b;
-	//  }
-	//  return digits;
-	//}
-	//static string toBasedName(uint n) {
-	//  auto digits = toDigits(n, DIGITS.length);
-	//  char[] s = [];
-	//  foreach_reverse(ubyte d; digits) {
-	//    s ~= DIGITS[d];
-	//  }
-	//  return s.dup;
-	//}
-	//static string[string] formatedNames = [];
-	
+
 	private string reformatName(uint n, uint p) {
 		return format("%s%dt%ds%d", namePrefix, tagNumber, n, p);
-		//return opt.namePrefix ~ toBasedName(tagNumber) ~ "t" ~ toBasedName(n) ~ "s" ~ toBasedName(p);
 	}
 	
 	private string renameString(string s, uint n) {
