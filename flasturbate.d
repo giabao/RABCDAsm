@@ -60,7 +60,7 @@ void showFunny(int n = -1, string forceFunny = null)
 				funnies ~= l;
 	}
 
-	const string username = getenv("USERNAME") ? getenv("USERNAME") : "<your name>";
+	const string username = environment.get("USERNAME", "<your name>");
 	const auto rand = n < 0 || n >= funnies.length ? uniform(0, funnies.length) : n;
 	const string funny = replace(forceFunny ? forceFunny : funnies[rand], regex(r"\$\{?USERNAME\b\}?"), username);
 

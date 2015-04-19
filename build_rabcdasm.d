@@ -48,7 +48,8 @@ string compiler, flags;
 void compile(string program)
 {
 	stderr.writeln("* Building ", program);
-	enforce(system(format("rdmd --build-only --compiler=%s %s %s", compiler, flags, program)) == 0, "Compilation of " ~ program ~ " failed");
+	string command = format("rdmd --build-only --compiler=%s %s %s", compiler, flags, program);
+	enforce(wait(spawnShell(command)) == 0, "Compilation of " ~ program ~ " failed");
 }
 
 void test(string code, string extraFlags=null)
@@ -56,7 +57,8 @@ void test(string code, string extraFlags=null)
 	const FN = "test.d";
 	std.file.write(FN, code);
 	scope(exit) remove(FN);
-	enforce(system(format("rdmd --force --compiler=%s %s %s %s", compiler, flags, extraFlags, FN)) == 0, "Test failed");
+	string command = format("rdmd --force --compiler=%s %s %s %s", compiler, flags, extraFlags, FN);
+	enforce(wait(spawnShell(command)) == 0, "Test failed");
 	stderr.writeln(" >>> OK");
 }
 
@@ -64,13 +66,9 @@ int main()
 {
 	try
 	{
-		compiler = getenv("DC");
-		if (compiler is null)
-			compiler = DEFAULT_COMPILER;
+		compiler = environment.get("DC", DEFAULT_COMPILER);
 
-		flags = getenv("DCFLAGS");
-		if (flags is null)
-			flags = DEFAULT_FLAGS;
+		flags = environment.get("DCFLAGS", DEFAULT_FLAGS);
 
 		stderr.writeln("* Checking for working compiler...");
 		test(`
